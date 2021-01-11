@@ -1,0 +1,27 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+{% block content %}
+
+    <div class="border p-3 mb-3">
+        <img  class="img-fluid rounded-circle border m-2" src="{% static 'blog/images/profile-img.png' %}" alt="صورة الناشر" width="70px">
+        <span class="text-secondary" style="font-size: 35px;">{{post.title}}</span>
+        <h3 style="font-size: 12px;">نشر في {{post.post_date|date:'d-m-Y'}}</h3>
+        <p>{{post.content}}</p>
+    </div>
+
+
+    <h2 class="border-bottom mt-5 mb-3">التعليقات ({{comments.count}})</h2>
+    
+
+{% for comment in comments %}
+<ul class="p-3 comment">
+    <h6 class="border-bottom p-2">({{comment.name}}) <span class="text-secondary">
+        {{comment.comment_date|date:'d-m-Y'}}
+    </span></h6>
+    {{comment.body}}
+</ul>
+{% empty %}
+<h6 class="text-center p-4 comment">لا يوجد تعليقات.</h6>
+{% endfor %}
+
+{% endblock content %}

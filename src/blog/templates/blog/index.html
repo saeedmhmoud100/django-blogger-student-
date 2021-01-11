@@ -1,0 +1,17 @@
+{% extends 'blog/base.html'%}
+
+{% load static %}
+
+
+{% block content %}
+
+{% for post in posts %}
+    <div class="border p-3 mb-3">
+        <img  class="img-fluid rounded-circle border m-2" src="{% static 'blog/images/profile-img.png' %}" alt="صورة الناشر" width="70px">
+        <span class="text-secondary" style="font-size: 35px;"><a class="text-dark" href="{% url 'detail' post.id %}">{{post.title}}</a></span>
+        <h3 style="font-size: 12px;">نشر في {{post.post_date|date:'d-m-Y'}}</h3>
+        <p>{{post.content}}</p>
+    </div>
+{% endfor %} 
+
+{% endblock content %}
