@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import post,comment
+from .form import NewComment
+
 # Create your views here.
 
 
@@ -47,9 +49,11 @@ def post_detail(request, post_id):
 
     posts= get_object_or_404(post, pk= post_id)
     comments = comment.objects.all().filter(active=True, Post=posts)
+    comment_form = NewComment()
     context = {
         'title':posts,
         'post':posts,
         'comments':comments,
+        'comment_form':comment_form
     }
     return render(request, 'blog/detail.html', context)
