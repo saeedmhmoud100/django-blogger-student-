@@ -48,12 +48,25 @@ def about(request):
 def post_detail(request, post_id):
 
     posts= get_object_or_404(post, pk= post_id)
-    comments = comment.objects.all().filter(active=True, Post=posts)
+    comments = posts.comments.filter(active=True) #comment.objects.all().filter(active=True, Post=posts)
     comment_form = NewComment()
+    #comment_form = None
     context = {
         'title':posts,
         'post':posts,
         'comments':comments,
         'comment_form':comment_form
     }
+
+    if request.method == "POST":
+        comment_form = NewComment(data=request.POST)
+        if comment_form.is_valid():
+            print('yes')
+            new_comment = comment_form.save(commit=False)
+            new_comment.Post=posts
+            new_comment.save()
+            comment_form = NewComment()
+            
+    else:
+        comment_form = NewComment()
     return render(request, 'blog/detail.html', context)

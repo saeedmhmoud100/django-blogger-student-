@@ -29,7 +29,7 @@ class comment(models.Model):
     Post = models.ForeignKey(post, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
-        return '.علق {} علي {}'.format(self.name, self.post)
+        return '.علق {} علي {}'.format(self.name, self.Post)
     
     class Meta:
         ordering = ('-comment_date',)
