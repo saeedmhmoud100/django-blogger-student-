@@ -1,5 +1,5 @@
 {% load static %}
-
+ {% load post_tag %} 
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -71,11 +71,11 @@
                 <div class="col-md-4">
                     <div class="card mb-3">
                         <h3 class="text-center bg-secondary text-light p-2">اخر التدوينات</h3>
-                        {% include 'blog/latest_posts.html' %}
+                        {% latest_posts %}
                     </div>
                     <div class="card mb-3">
                         <h3 class="text-center bg-secondary text-light p-2 ">اخر التعليقات</h3>
-                        {% include "blog/latest_comments.html" %}
+                        {% latest_comments %}
                     </div>
                 </div>
             </div>
