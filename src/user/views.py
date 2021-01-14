@@ -49,3 +49,9 @@ def Logout_user(request):
         'title': 'تسجيل الخروج',
 
     })
+
+
+def profile(request):
+    return render(request, 'user/profile.html', {
+        'title':'الملف الشخصي',
+    })
