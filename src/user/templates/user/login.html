@@ -7,6 +7,12 @@
 
 
 <div class="border p-4 mb-5 ">
+
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+{{message}}
+</div>
+{% endfor %}
     <legend class="border-bottom mb-3 pb-1 ">التسجيل</legend>
     <form method="POST">
         {% csrf_token %}
@@ -14,7 +20,7 @@
         <input class="btn btn-secondary mt-4" type='submit' value='تسجيل'>
     </form>
     <div class="border-top pt-2 mt-4">
-        <small>اذا كان لديك حساب من قبل فيمكنك <a href="{% url 'login' %}">تسجيل الدخول</a></small>
+        <small>اذا لم يكن لديك حساب من قبل فيمكنك <a href="{% url 'register' %}">التسجيل الان</a></small>
     </div>
 </div>
 

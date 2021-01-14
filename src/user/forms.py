@@ -7,16 +7,16 @@ class UserCreationForm(forms.ModelForm):
     email = forms.EmailField(label='البريد االكتروني')
     first_name = forms.CharField(label='الاسم الاول')
     last_name = forms.CharField(label='الاسم الاخير')
-    password1 = forms.CharField(label='كلمة المرور', widget=forms.PasswordInput(), min_length=8)
+    password = forms.CharField(label='كلمة المرور', widget=forms.PasswordInput(), min_length=8)
     password2 = forms.CharField(label='تأكيد كلمة المرور', widget=forms.PasswordInput(), min_length=8)
 
     class Meta:
         model = User
-        fields = ('username','email','first_name','last_name','password1', 'password2')
+        fields = ('username','email','first_name','last_name','password', 'password2')
 
     def clean_password2(self):
         cd = self.cleaned_data
-        if cd['password1'] != cd['password2']:
+        if cd['password'] != cd['password2']:
             raise forms.ValidationError('كلمة المرور غير متطابقة')
         return cd['password2']
 
@@ -25,3 +25,12 @@ class UserCreationForm(forms.ModelForm):
         if User.objects.filter(username=cd['username']).exists():
             raise forms.ValidationError('يوجد مستخدم مسجل بهاذا الاسم')
         return cd['username']
+
+
+class LoginForm(forms.ModelForm):
+    username = forms.CharField(label='اسم المستخدم', help_text='اسم المستخدم يجب الا يحتوي علي اي مسافات')
+    password = forms.CharField(label='كلمة المرور' , widget=forms.PasswordInput() )
+    class Meta:
+        
+        model = User
+        fields = ('username', 'password')
