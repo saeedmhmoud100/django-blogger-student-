@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
     <div class="border p-3 mb-3">
-        <img  class="img-fluid rounded-circle border m-2" src="{% static 'blog/images/profile-img.png' %}" alt="صورة الناشر" width="70px">
+        <img  class="img-fluid rounded-circle border m-2" src="{% static 'blog/images/defalte.png' %}" alt="صورة الناشر" width="70px">
         <span class="text-secondary" style="font-size: 35px;">{{post.title}}</span>
         <h3 style="font-size: 12px;">نشر في {{post.post_date|date:'d-m-Y'}}</h3>
         <p>{{post.content}}</p>

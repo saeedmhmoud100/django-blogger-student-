@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import UserCreationForm, LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from blog.models import post
 # Create your views here.
 
 def register(request):
@@ -52,6 +53,8 @@ def Logout_user(request):
 
 
 def profile(request):
+    posts =post.objects.filter(author=request.user)
     return render(request, 'user/profile.html', {
         'title':'الملف الشخصي',
+        'posts':posts,
     })

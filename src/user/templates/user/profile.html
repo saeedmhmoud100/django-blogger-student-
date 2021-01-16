@@ -13,8 +13,8 @@
         </div>
         <div class="col-md-9">
             <h2 class="mb-4">اسم المستخدم</h2>
-            <p class="font-weight-bold">الاسم: <span class="font-weight-normal">احمد محمود</span></p>
-            <p class="font-weight-bold">الايميل: <span class="font-weight-normal"> ahmed@gmail.com</span></p>
+            <p class="font-weight-bold">الاسم: <span class="font-weight-normal">{{user.first_name}} {{user.last_name}}</span></p>
+            <p class="font-weight-bold">الايميل: <span class="font-weight-normal"> {{user.email}}</span></p>
         </div>
     </div>
 </div>
@@ -22,33 +22,29 @@
 <div class="row">
     <div class="col-md">
         <h3 class="border-bottom pb-3 mb-4">عدد التدوينت التي دونتها</h3>
-        <h4 class="bg-secondary text-center p-4 text-light">40</h4>
+        <h4 class="bg-secondary text-center p-4 text-light">{{posts.count}}</h4>
     </div>    
 </div>
 
 <h3 class="border-bottom mb-4 pb-3 mp-5">تدويناتي</h3>
+{% for post in posts %}
+    
+
 <ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
+    <a href="{% url 'detail' post.id %}" class="text-dark">{{post.title}}</a>
 </ul>
-<ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
-</ul>
-<ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
-</ul>
-<ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
-</ul>
-<ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
-</ul>
-<ul class="pr-2">
-    <a href="#" class="text-dark">عنوان التدوينة</a>
-</ul>
+{% empty %}
+<h4 class="text-center mb-5">لا يوجد تدوينات</h4>
+{% endfor %}
+
+{% if posts.count >= 10 %}
+    
 
 <div class="border-top pt-3 mt-4 text-center">
     <a href="" class="btn btn-secondary bg-secondary">التالي</a>
     <span class="pr-4 pl-4">صفحة 2 من 5</span>
     <a href="" class="btn btn-secondary bg-secondary">السابق</a>
 </div>
+
+{% endif %}
 {% endblock content %}
