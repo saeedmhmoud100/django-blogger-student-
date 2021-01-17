@@ -12,7 +12,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username','email','first_name','last_name','password', 'password2')
+        fields = ('username','first_name','last_name','email','password', 'password2')
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -30,7 +30,7 @@ class UserCreationForm(forms.ModelForm):
         cd = self.cleaned_data
         if User.objects.filter(email=cd['email']).exists():
             raise forms.ValidationError('هذا الايميل مسجل من قبل')
-            return cd['email']
+        return cd['email']
 
 class LoginForm(forms.ModelForm):
     username = forms.CharField(label='اسم المستخدم', help_text='اسم المستخدم يجب الا يحتوي علي اي مسافات')

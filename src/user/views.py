@@ -16,6 +16,8 @@ def register(request):
             user =form.save(commit=False)
             user.set_password(password)
             user.save()
+            email = form.cleaned_data['email']
+            print(email)
             username = form.cleaned_data['username']
             messages.success(request,f'تهانينا {username} لقد تم التسجيل بنجاح.')
             return redirect('login')
