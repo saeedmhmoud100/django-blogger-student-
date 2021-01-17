@@ -27,7 +27,7 @@
 </div>
 
 <h3 class="border-bottom mb-4 pb-3 mp-5">تدويناتي</h3>
-{% for post in posts %}
+{% for post in posts_list %}
     
 
 <ul class="pr-2">
@@ -37,10 +37,5 @@
 <h4 class="text-center mb-5">لا يوجد تدوينات</h4>
 {% endfor %}
 
-<div class="border-top pt-3 mt-4 text-center">
-    <a href="" class="btn btn-secondary bg-secondary">التالي</a>
-    <span class="pr-4 pl-4">صفحة 2 من 5</span>
-    <a href="" class="btn btn-secondary bg-secondary">السابق</a>
-</div>
-
+{% include "blog/pagination.html" with page=posts_list %}
 {% endblock content %}

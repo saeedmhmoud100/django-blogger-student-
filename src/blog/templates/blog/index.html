@@ -16,8 +16,14 @@
         <img  class="img-fluid rounded-circle border m-2" src="{{post.author.profile.image.url}}" alt="صورة الناشر" width="70px">
         <span class="text-secondary" style="font-size: 35px;"><a class="text-dark" href="{% url 'detail' post.id %}">{{post.title}}</a></span>
         <h3 style="font-size: 12px;">نشر في {{post.post_date|date:'d-m-Y'}}</h3>
-        <p>{{post.content}}</p>
+        {% if post.content|length > 1000 %}
+        <p>{{post.content|slice:'1245'}}...</p>
+        {% else %}
+        <p>{{post.content|length}}</p>
+        {% endif %}
+        
     </div>
 {% endfor %} 
 
+{% include "blog/pagination.html" with page=posts%}
 {% endblock content %}
