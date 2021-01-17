@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from .models import post,comment
-from .form import NewComment
+from .form import NewComment, PostCreateform
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 
 
@@ -80,3 +82,38 @@ def post_detail(request, post_id):
     }
 
     return render(request, 'blog/detail.html', context)
+
+
+class PostCreateViews(LoginRequiredMixin ,CreateView):
+    model = post
+    #fields = ('title', 'content')
+    template_name='blog/new_post.html'
+    form_class = PostCreateform
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class PostUpdateViews(UserPassesTestMixin ,LoginRequiredMixin ,UpdateView):
+    model = post
+    template_name='blog/post_update.html'
+    form_class = PostCreateform
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        else:
+            return False
+
+
+class PostDeleteview(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    model = post
+    success_url= '/'
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

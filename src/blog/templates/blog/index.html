@@ -19,7 +19,7 @@
         {% if post.content|length > 1000 %}
         <p>{{post.content|slice:'1245'}}...</p>
         {% else %}
-        <p>{{post.content|length}}</p>
+        <p>{{post.content}}</p>
         {% endif %}
         
     </div>

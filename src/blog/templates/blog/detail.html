@@ -6,6 +6,12 @@
     <div class="border p-3 mb-3">
         <img  class="img-fluid rounded-circle border m-2" src="{{post.author.profile.image.url}}" alt="صورة الناشر" style="width=120px; height:120px" >
         <span class="text-secondary" style="font-size: 35px;">{{post.title}}</span>
+        {% if post.author == user %}
+        <div class="form-group btn-editing">
+            <a href="{% url 'post-update' post.id %}" class="btn btn-secondary">تحرير</a>
+            <a href="{% url 'post-delete' post.id %}" class="btn btn-danger">حذف</a>
+        </div>
+        {% endif %}
         <h3 style="font-size: 12px;">نشر في {{post.post_date|date:'d-m-Y'}}</h3>
         <p>{{post.content}}</p>
     </div>
